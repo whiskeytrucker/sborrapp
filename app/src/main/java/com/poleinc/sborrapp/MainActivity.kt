@@ -9,46 +9,53 @@ import android.widget.SeekBar
 import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
-    lateinit var mp: MediaPlayer
+    lateinit var mpBA: MediaPlayer
+    lateinit var mbAUGH: MediaPlayer
     lateinit var sk: SeekBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var buttonPlay = findViewById<Button>(R.id.buttonPlay)
+        var buttonBrainAneurysm = findViewById<Button>(R.id.buttonBrainAneurysm)
+        var buttonAUGH = findViewById<Button>(R.id.buttonAUGH)
         var buttonStop = findViewById<Button>(R.id.buttonStop)
 
+
         sk = findViewById<SeekBar>(R.id.seek_bar)
-        mp = MediaPlayer.create(this, R.raw.brainaneurysm)
+        mpBA = MediaPlayer.create(this, R.raw.brainaneurysm)
+        mbAUGH = MediaPlayer.create(this, R.raw.augh)
 
-        sk.max = mp.duration/1000
+        //sk.max = mpBA.duration/1000
 
 
-        buttonPlay.setOnClickListener(){
-            if(!mp.isPlaying){
-                reproduce()
-            }else{
+        buttonBrainAneurysm.setOnClickListener() {
+            if (!mpBA.isPlaying) {
+                mpBA.start()
+            } else {
                 Toast.makeText(this, "Aspetta che finisca l'audio", Toast.LENGTH_LONG).show()
             }
         }
 
-        buttonStop.setOnClickListener(){
-            if(mp.isPlaying) {
-                stop()
-            }else{
+        buttonAUGH.setOnClickListener() {
+            if (!mbAUGH.isPlaying) {
+                mbAUGH.start()
+            } else {
+                Toast.makeText(this, "Aspetta che finisca l'audio", Toast.LENGTH_LONG).show()
+            }
+        }
+
+
+        buttonStop.setOnClickListener() {
+            if (mpBA.isPlaying) {
+                mpBA.stop()
+                mbAUGH.stop()
+                mpBA.prepare()
+                mbAUGH.prepare()
+            } else {
                 Toast.makeText(this, "Non c'è nessun audio da fermare", Toast.LENGTH_LONG).show()
             }
         }
-    }
 
-    private fun reproduce(){
-        mp.start()
     }
-
-    private fun stop(){
-        mp.stop()
-        mp.prepare()
-    }
-
 }
