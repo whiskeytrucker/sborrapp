@@ -4,13 +4,13 @@ package com.poleinc.sborrapp
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.widget.Button
 import android.widget.SeekBar
-import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
     lateinit var mpBA: MediaPlayer
-    lateinit var mbAUGH: MediaPlayer
+    lateinit var mpAUGH: MediaPlayer
     lateinit var sk: SeekBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,41 +21,66 @@ class MainActivity : AppCompatActivity() {
         var buttonAUGH = findViewById<Button>(R.id.buttonAUGH)
         var buttonStop = findViewById<Button>(R.id.buttonStop)
 
-
         sk = findViewById<SeekBar>(R.id.seek_bar)
         mpBA = MediaPlayer.create(this, R.raw.brainaneurysm)
-        mbAUGH = MediaPlayer.create(this, R.raw.augh)
+        mpAUGH = MediaPlayer.create(this, R.raw.augh)
 
         //sk.max = mpBA.duration/1000
 
 
         buttonBrainAneurysm.setOnClickListener() {
             if (!mpBA.isPlaying) {
+                initializeSeekBar(mpBA)
                 mpBA.start()
-            } else {
-                Toast.makeText(this, "Aspetta che finisca l'audio", Toast.LENGTH_LONG).show()
             }
         }
 
         buttonAUGH.setOnClickListener() {
-            if (!mbAUGH.isPlaying) {
-                mbAUGH.start()
-            } else {
-                Toast.makeText(this, "Aspetta che finisca l'audio", Toast.LENGTH_LONG).show()
+            if (!mpAUGH.isPlaying) {
+                initializeSeekBar(mpAUGH)
+                mpAUGH.start()
             }
         }
 
 
         buttonStop.setOnClickListener() {
-            if (mpBA.isPlaying) {
+            if (mpBA.isPlaying || mpAUGH.isPlaying) {
                 mpBA.stop()
-                mbAUGH.stop()
+                mpAUGH.stop()
                 mpBA.prepare()
-                mbAUGH.prepare()
-            } else {
-                Toast.makeText(this, "Non c'è nessun audio da fermare", Toast.LENGTH_LONG).show()
+                mpAUGH.prepare()
             }
         }
 
+        sk.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(p0: SeekBar?, progress: Int, fromUser: Boolean) {
+                if(fromUser) mpBA?.seekTo(progress); mpAUGH?.seekTo(progress)
+            }
+
+            override fun onStartTrackingTouch(p0: SeekBar?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onStopTrackingTouch(p0: SeekBar?) {
+                TODO("Not yet implemented")
+            }
+
+        })
+
+    }
+
+    private fun initializeSeekBar(mp: MediaPlayer) {
+        sk.max = mp!!.duration
+        val handler = Handler()
+        handler.postDelayed(object: Runnable {
+            override fun run() {
+                try{
+                    sk.progress = mp!!.currentPosition
+                    handler.postDelayed(this, 100)
+                }catch(e: java.lang.Exception){
+                    sk.progress = 0
+                }
+            }
+        }, 0)
     }
 }
