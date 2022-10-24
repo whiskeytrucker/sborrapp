@@ -11,6 +11,7 @@ import android.widget.SeekBar
 class MainActivity : AppCompatActivity() {
     lateinit var mpBA: MediaPlayer
     lateinit var mpAUGH: MediaPlayer
+    lateinit var mpPiazzala: MediaPlayer
     lateinit var sk: SeekBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,11 +20,13 @@ class MainActivity : AppCompatActivity() {
 
         var buttonBrainAneurysm = findViewById<Button>(R.id.buttonBrainAneurysm)
         var buttonAUGH = findViewById<Button>(R.id.buttonAUGH)
+        var buttonPiazzala = findViewById<Button>(R.id.buttonPiazzala)
         var buttonStop = findViewById<Button>(R.id.buttonStop)
 
-        sk = findViewById<SeekBar>(R.id.seek_bar)
+        sk = findViewById(R.id.seek_bar)
         mpBA = MediaPlayer.create(this, R.raw.brainaneurysm)
         mpAUGH = MediaPlayer.create(this, R.raw.augh)
+        mpPiazzala = MediaPlayer.create(this, R.raw.piazzala);
 
         //sk.max = mpBA.duration/1000
 
@@ -42,11 +45,20 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        buttonPiazzala.setOnClickListener(){
+            if(!mpPiazzala.isPlaying){
+                initializeSeekBar(mpPiazzala)
+                mpPiazzala.start()
+            }
+        }
+
 
         buttonStop.setOnClickListener() {
-            if (mpBA.isPlaying || mpAUGH.isPlaying) {
+            if (mpBA.isPlaying || mpAUGH.isPlaying || mpPiazzala.isPlaying) {
                 mpBA.stop()
                 mpAUGH.stop()
+                mpPiazzala.stop()
+                mpPiazzala.prepare()
                 mpBA.prepare()
                 mpAUGH.prepare()
             }
@@ -54,7 +66,7 @@ class MainActivity : AppCompatActivity() {
 
         sk.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(p0: SeekBar?, progress: Int, fromUser: Boolean) {
-                if(fromUser) mpBA?.seekTo(progress); mpAUGH?.seekTo(progress)
+                if(fromUser) mpBA?.seekTo(progress); mpPiazzala?.seekTo(progress); mpAUGH?.seekTo(progress)
             }
 
             override fun onStartTrackingTouch(p0: SeekBar?) {
@@ -75,8 +87,8 @@ class MainActivity : AppCompatActivity() {
         handler.postDelayed(object: Runnable {
             override fun run() {
                 try{
-                    sk.progress = mp!!.currentPosition
-                    handler.postDelayed(this, 100)
+                    sk.progress = mp.currentPosition
+                    handler.postDelayed(this, 1)
                 }catch(e: java.lang.Exception){
                     sk.progress = 0
                 }

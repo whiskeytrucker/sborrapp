@@ -57,4 +57,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.751" />
 
+    <Button
+        android:id="@+id/buttonPiazzala"
+        android:layout_width="121dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/orange"
+        android:text="@string/e_piazzala"
+        app:layout_constraintBottom_toTopOf="@+id/buttonBrainAneurysm"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
