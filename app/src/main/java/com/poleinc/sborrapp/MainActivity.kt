@@ -33,21 +33,21 @@ class MainActivity : AppCompatActivity() {
 
         buttonBrainAneurysm.setOnClickListener() {
             if (!mpBA.isPlaying) {
-                initializeSeekBar(mpBA)
+                //initializeSeekBar(mpBA)
                 mpBA.start()
             }
         }
 
         buttonAUGH.setOnClickListener() {
             if (!mpAUGH.isPlaying) {
-                initializeSeekBar(mpAUGH)
+                //initializeSeekBar(mpAUGH)
                 mpAUGH.start()
             }
         }
 
         buttonPiazzala.setOnClickListener(){
             if(!mpPiazzala.isPlaying){
-                initializeSeekBar(mpPiazzala)
+                //initializeSeekBar(mpPiazzala)
                 mpPiazzala.start()
             }
         }
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
                 mpAUGH.prepare()
             }
         }
-
+        /*
         sk.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(p0: SeekBar?, progress: Int, fromUser: Boolean) {
                 if(fromUser) mpBA?.seekTo(progress); mpPiazzala?.seekTo(progress); mpAUGH?.seekTo(progress)
@@ -77,10 +77,10 @@ class MainActivity : AppCompatActivity() {
                 TODO("Not yet implemented")
             }
 
-        })
+        })*/
 
     }
-
+    /*
     private fun initializeSeekBar(mp: MediaPlayer) {
         sk.max = mp!!.duration
         val handler = Handler()
@@ -94,5 +94,5 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }, 0)
-    }
+    }*/
 }
