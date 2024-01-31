@@ -7,18 +7,42 @@
     tools:context=".MainActivity">
 
 
+    <TextView
+        android:id="@+id/sesso"
+        android:layout_width="192dp"
+        android:layout_height="94dp"
+        android:layout_marginBottom="572dp"
+        android:text="@string/diego"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/cambio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/orange"
+        android:text="Hehe xd"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.051" />
+
+
     <Button
         android:id="@+id/buttonBrainAneurysm"
         android:layout_width="122dp"
         android:layout_height="55dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginEnd="255dp"
+        android:layout_marginBottom="244dp"
         android:backgroundTint="@color/orange"
         android:text="@string/cervello_esplode"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.112"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.654" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/buttonStop"
@@ -31,7 +55,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
-
 
 
     <SeekBar
@@ -48,24 +71,32 @@
         android:id="@+id/buttonAUGH"
         android:layout_width="121dp"
         android:layout_height="52dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginEnd="257dp"
+        android:layout_marginBottom="169dp"
         android:backgroundTint="@color/orange"
         android:text="@string/augh"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.113"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.751" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonBrainAneurysm"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/buttonPiazzala"
         android:layout_width="121dp"
         android:layout_height="57dp"
         android:layout_marginStart="32dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="258dp"
+        android:layout_marginBottom="320dp"
         android:backgroundTint="@color/orange"
         android:text="@string/e_piazzala"
-        app:layout_constraintBottom_toTopOf="@+id/buttonBrainAneurysm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

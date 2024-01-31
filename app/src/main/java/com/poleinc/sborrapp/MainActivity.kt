@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.widget.Button
 import android.widget.SeekBar
+import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
     lateinit var mpBA: MediaPlayer
@@ -23,12 +24,24 @@ class MainActivity : AppCompatActivity() {
         var buttonPiazzala = findViewById<Button>(R.id.buttonPiazzala)
         var buttonStop = findViewById<Button>(R.id.buttonStop)
 
+        var cambio = findViewById<Button>(R.id.cambio)
+        var scritta = findViewById<TextView>(R.id.sesso)
+
         sk = findViewById(R.id.seek_bar)
         mpBA = MediaPlayer.create(this, R.raw.brainaneurysm)
         mpAUGH = MediaPlayer.create(this, R.raw.augh)
         mpPiazzala = MediaPlayer.create(this, R.raw.piazzala);
 
         //sk.max = mpBA.duration/1000
+
+
+        cambio.setOnClickListener(){
+            if(scritta.text == "SI DIEGO"){
+                scritta.text = "VAI DIEGO"
+            }else{
+                scritta.text = "SI DIEGO"
+            }
+        }
 
 
         buttonBrainAneurysm.setOnClickListener() {
